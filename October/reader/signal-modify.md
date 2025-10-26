@@ -9,7 +9,7 @@
 #### 信道模型
 - **阵列响应矢量**（LOS，无相位误差）：
   \[
-  \mathbf{w} = \mathbf{a}(\varphi_0) = \begin{pmatrix} 1 \\ e^{-j k \cos(\varphi_0)} \\ \vdots \\ e^{-j k (N-1) \cos(\varphi_0)} \end{pmatrix}, \quad a_n(\varphi_0) = e^{-j k n \cos(\varphi_0)}, \quad \|\mathbf{a}(\varphi_0)\|^2 = N,
+  \mathbf{w} = \beta_0 \mathbf{a}(\varphi_0) =\beta_0 \begin{pmatrix} 1 \\ e^{-j k \cos(\varphi_0)} \\ \vdots \\ e^{-j k (N-1) \cos(\varphi_0)} \end{pmatrix}, \quad a_n(\varphi_0) = e^{-j k n \cos(\varphi_0)}, \quad \|\mathbf{a}(\varphi_0)\|^2 = N,
   \]
   其中 \( k = 2\pi / \lambda \)，假设 ULA（均匀线性阵列），\( d = \lambda/2 \)，则 \( k d = \pi \)，但保持一般形式以通用性。
 - **NLOS 分量**（带相位误差）：
@@ -19,14 +19,14 @@
   每个元素模为 1，\(\|\tilde{\mathbf{a}}(\varphi_l)\|^2 = N\)。
 - **信道向量**：
   \[
-  \mathbf{h} = \sqrt{\beta_0} \tilde{\mathbf{a}}(\varphi_0) + \sum_{l=1}^L \sqrt{\beta_l} \tilde{\mathbf{a}}(\varphi_l),
+  \mathbf{h} = \beta_0 \tilde{\mathbf{a}}(\varphi_0) + \sum_{l=1}^L \beta_l \tilde{\mathbf{a}}(\varphi_l),
   \]
   其中：
   - \(\beta_0 \sim \mathcal{CN}(0, 1)\)，方差 \(\mathbb{E}[|\beta_0|^2] = 1\)。
   - \(\beta_l \sim \mathcal{CN}(0, 0.1)\)，方差 \(\mathbb{E}[|\beta_l|^2] = 0.1\)，\(l = 1, \ldots, L\)。不同路径的 \(\beta_l\) 独立。
 - **目标**：
   \[
-  \mathbb{E}[|\mathbf{w}^H \mathbf{h}|^2] = \mathbb{E}\left[ \left| \mathbf{a}^H(\varphi_0) \left( \sqrt{\beta_0} \tilde{\mathbf{a}}(\varphi_0) + \sum_{l=1}^L \sqrt{\beta_l} \tilde{\mathbf{a}}(\varphi_l) \right) \right|^2 \right],
+  \mathbb{E}[|\mathbf{w}^H \mathbf{h}|^2] = \mathbb{E}\left[ \left| \beta _0^*  \mathbf{a}^H(\varphi_0) \left(\beta_0 \tilde{\mathbf{a}}(\varphi_0) + \sum_{l=1}^L \beta_l \tilde{\mathbf{a}}(\varphi_l) \right) \right|^2 \right],
   \]
   期望针对所有随机变量：\(\Delta \theta_n\)（相位误差）和 \(\beta_0, \beta_l\)（复高斯增益）。
 
@@ -41,11 +41,11 @@
 
 #### 内积
 \[
-\mathbf{w}^H \mathbf{h} = \mathbf{a}^H(\varphi_0) \left( \sqrt{\beta_0} \tilde{\mathbf{a}}(\varphi_0) + \sum_{l=1}^L \sqrt{\beta_l} \tilde{\mathbf{a}}(\varphi_l) \right) = \sqrt{\beta_0} \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_0) + \sum_{l=1}^L \sqrt{\beta_l} \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l).
+\mathbf{w}^H \mathbf{h} = {\beta_0^* } \mathbf{a}^H(\varphi_0) \left( \beta_0 \tilde{\mathbf{a}}(\varphi_0) + \sum_{l=1}^L \beta_l \tilde{\mathbf{a}}(\varphi_l) \right) = {\beta_0 {\beta _0^* }} \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_0) + \sum_{l=1}^L { {\beta_l} {\beta_0^*}} \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l).
 \]
 记：
-- \( s_0 = \sqrt{\beta_0} \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_0) = \sqrt{\beta_0}  \sum_{n=0}^{N-1}  e^{j \Delta \theta_n} \)。
-- \( s_l = \sqrt{\beta_l} \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l) = \sqrt{\beta_l} \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n} \).
+- \( s_0 = \left| {{\beta _0}} \right| ^2 \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_0) =  \left| {{\beta _0}} \right| ^2 \sum_{n=0}^{N-1}  e^{j \Delta \theta_n} \)。
+- \( s_l = \left|{ {\beta_l} {\beta_0^* }} \right| \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l) = \left|{ {\beta_l} {\beta_0^* }} \right|  \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n} \).
 
 #### 模平方
 \[
@@ -68,7 +68,7 @@
 1. **LOS 自项**：
  E[a0al]2.md
 \[
-\mathbb{E}[|s_0|^2] = N + N(N-1) e^{-\sigma^2},
+\mathbb{E}[|s_0|^2] = 2N + 2N(N-1) e^{-\sigma^2},
 \]
 
 2. **NLOS 自项**：
@@ -78,11 +78,13 @@
 \]
 
 3. **LOS-NLOS 交叉项**：
-   这里的交叉项中固定了一个l或m为 $ s_0 $ 或 $ s_0^* $ 。
+   这里的交叉项中固定了一个l或m为 $ s_0 $ 或 $ s_0^* $, 但不论固定前面l还是后面m，\( \left| {{\beta _0}} \right| ^2\)因子都是固定实值因子不会改变 。
+   先看固定后面m，并改写为l的情况：
    \[
-   s_0 s_l^* = \sqrt{\beta_0} N \cdot \sqrt{\beta_l^*} [\mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l)]^*.
+   s_0 s_l^* = \left| {{\beta _0}} \right| ^2 N \cdot \left|{ {\beta_l^* } {\beta_0 }} \right| [\mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l)]^*.
    \]
-   - 历史推导：
+   【注】这里N是s0中aa因子的省略记法，实际有误。
+   - 历史推导（没仔细看）：
      \[
      \mathbb{E}_{\Delta \theta}[\mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l)] = e^{-\sigma^2 / 2} \sum_{n=0}^{N-1} e^{j n \delta_l}.
      \]
@@ -91,12 +93,12 @@
      \]
    - \(\beta_0, \beta_l\) 独立：
      \[
-     \mathbb{E}[s_0 s_l^*] = N e^{-\sigma^2 / 2} \mathbb{E}[\sqrt{\beta_0 \beta_l^*}] \sum_{n=0}^{N-1} e^{-j n \delta_l}.
+     \mathbb{E}[s_0 s_l^*] = N e^{-\sigma^2 / 2} \mathbb{E}[\beta_0 \beta_0^* \beta_0 \beta_l^*] \sum_{n=0}^{N-1} e^{-j n \delta_l}.
      \]
-     - \(\mathbb{E}[\sqrt{\beta_0 \beta_l^*}] = \mathbb{E}[\sqrt{\beta_0}] \mathbb{E}[\sqrt{\beta_l^*}] = 0 \cdot 0 = 0\)（因复高斯均值为 0）。
+     - \(\mathbb{E}[\beta_0 \beta_0^* \beta_0 \beta_l^*] = \sim \cdot \mathbb{E}[\beta_l] = \sim \cdot 0 = 0\)。
    - 同样：
      \[
-     \mathbb{E}[s_m s_0^*] = N e^{-\sigma^2 / 2} \mathbb{E}[\sqrt{\beta_m \beta_0^*}] \sum_{n=0}^{N-1} e^{j n \delta_m} = 0.
+     \mathbb{E}[s_m s_0^*] = N e^{-\sigma^2 / 2} \mathbb{E}[\beta_0 \beta_0^* \beta_0^* \beta_l] \sum_{n=0}^{N-1} e^{j n \delta_m} = 0.
      \]
 
 故通通消除。
@@ -109,10 +111,10 @@
 
 #### 表达式
 \[
-s_l s_m^* = \sqrt{\beta_l \beta_m^*} \left( \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l) \right) \left( \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_m) \right)^* = \sqrt{\beta_l \beta_m^*} \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n^{(l)}} \sum_{p=0}^{N-1} e^{-j k p (\cos(\varphi_0) - \cos(\varphi_m))} e^{-j \Delta \theta_p^{(m)}}.
+s_l s_m^* = \left|{ {\beta_l} {\beta_0^* }} \right| \left|{ {\beta_m^* } {\beta_0}} \right| \left( \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l) \right) \left( \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_m) \right)^* = \left| {\beta_l \beta_m^*} \right | \left| {{\beta _0}} \right| ^2 \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n^{(l)}} \sum_{p=0}^{N-1} e^{-j k p (\cos(\varphi_0) - \cos(\varphi_m))} e^{-j \Delta \theta_p^{(m)}}.
 \]
 \[
-\mathbb{E}[s_l s_m^*] = \mathbb{E}[\sqrt{\beta_l \beta_m^*}] \sum_{n,p} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{-j k p (\cos(\varphi_0) - \cos(\varphi_m))} \mathbb{E}[e^{j (\Delta \theta_n^{(l)} - \Delta \theta_p^{(m)})}].
+\mathbb{E}[s_l s_m^*] = \mathbb{E}[\left| {\beta_l \beta_m^* } \right |] \mathbb{E}[\left| {{\beta _0}} \right| ^2] \sum_{n,p} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{-j k p (\cos(\varphi_0) - \cos(\varphi_m))} \mathbb{E}[e^{j (\Delta \theta_n^{(l)} - \Delta \theta_p^{(m)})}].
 \]
 
 #### 相位误差期望
@@ -128,7 +130,7 @@ s_l s_m^* = \sqrt{\beta_l \beta_m^*} \left( \mathbf{a}^H(\varphi_0) \tilde{\math
 
 #### 分离对角和非对角项
 \[
-\mathbb{E}[s_l s_m^*] = \mathbb{E}[\sqrt{\beta_l \beta_m^*}] \left[ \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l) - \cos(\varphi_0) + \cos(\varphi_m))} + e^{-\sigma^2} \sum_{n \neq p} e^{j k [n (\cos(\varphi_0) - \cos(\varphi_l)) - p (\cos(\varphi_0) - \cos(\varphi_m))]} \right].
+\mathbb{E}[s_l s_m^*] =\mathbb{E}[\left| {\beta_l \beta_m^* } \right |] \mathbb{E}[\left| {{\beta _0}} \right| ^2]\left[ \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l) - \cos(\varphi_0) + \cos(\varphi_m))} + e^{-\sigma^2} \sum_{n \neq p} e^{j k [n (\cos(\varphi_0) - \cos(\varphi_l)) - p (\cos(\varphi_0) - \cos(\varphi_m))]} \right].
 \]
 - 记 \(\delta_{lm} = k (\cos(\varphi_l) - \cos(\varphi_m))\)：
   \[
@@ -140,7 +142,7 @@ s_l s_m^* = \sqrt{\beta_l \beta_m^*} \left( \mathbf{a}^H(\varphi_0) \tilde{\math
   \]
   - 若 \(l = m\)：
     \[
-    \mathbb{E}[|s_l|^2] = \mathbb{E}[\beta_l] \left[ N + e^{-\sigma^2} \left| \sum_{n=0}^{N-1} e^{j n \delta_l} \right|^2 \right] = 0.1 \left[ N + e^{-\sigma^2} \left| \sum_{n=0}^{N-1} e^{j n \delta_l} \right|^2 \right].
+    \mathbb{E}[|s_l|^2] = \mathbb{E}[\left| {\beta_l } \right |^2] \mathbb{E}[\left| {{\beta _0}} \right| ^2] \left[ N + e^{-\sigma^2} \left| \sum_{n=0}^{N-1} e^{j n \delta_l} \right|^2 \right] = 0.1 \left[ N + e^{-\sigma^2} \left| \sum_{n=0}^{N-1} e^{j n \delta_l} \right|^2 \right].
     \]
 
   上面的看不懂对错，用下面这个新的就对了。
@@ -151,7 +153,7 @@ s_l s_m^* = \sqrt{\beta_l \beta_m^*} \left( \mathbf{a}^H(\varphi_0) \tilde{\math
 
   - 若 \(l \neq m\)：
     \[
-    \mathbb{E}[\sqrt{\beta_l \beta_m^*}] = \mathbb{E}[\sqrt{\beta_l}] \mathbb{E}[\sqrt{\beta_m^*}] = 0 \cdot 0 = 0.
+    \mathbb{E}[\left| {\beta_l \beta_m^*}\right |] = \mathbb{E}[\beta_l] \mathbb{E}[\beta_m^*] = 0 \cdot 0 = 0.
     \]
     因此，\(\mathbb{E}[s_l s_m^*] = 0\)（\(l \neq m\)）。
 
@@ -164,7 +166,7 @@ s_l s_m^* = \sqrt{\beta_l \beta_m^*} \left( \mathbf{a}^H(\varphi_0) \tilde{\math
 \mathbb{E}[|\mathbf{w}^H \mathbf{h}|^2] = \mathbb{E}[|s_0|^2] + \sum_{l=1}^L \mathbb{E}[|s_l|^2] + \sum_{l=1}^L \mathbb{E}[s_0 s_l^*] + \sum_{m=1}^L \mathbb{E}[s_m s_0^*] + \sum_{l,m=1}^L \mathbb{E}[s_l s_m^*].
 \]
 
-- 第一项：\(\mathbb{E}[|s_0|^2] = N + N(N-1) e^{-\sigma^2}\).
+- 第一项：\(\mathbb{E}[|s_0|^2] = 2N + 2N(N-1) e^{-\sigma^2}\).
 - 第二项：
   \[
   \sum_{l=1}^L \mathbb{E}[|s_l|^2] = \sum_{l=1}^L 0.1 \left[ N + e^{-\sigma^2} \left( \left| \frac{\sin(N \delta_l / 2)}{\sin(\delta_l / 2)} \right|^2 -N \right) \right].
@@ -182,7 +184,7 @@ s_l s_m^* = \sqrt{\beta_l \beta_m^*} \left( \mathbf{a}^H(\varphi_0) \tilde{\math
 
 **最终闭式表达式**：
 \[
-\mathbb{E}[|\mathbf{w}^H \mathbf{h}|^2] = N + N(N-1) e^{-\sigma^2} + 2 \sum_{l=1}^L 0.1 \left[ N + e^{-\sigma^2} \left( \left| \frac{\sin(N \delta_l / 2)}{\sin(\delta_l / 2)} \right|^2 -N \right) \right].
+\mathbb{E}[|\mathbf{w}^H \mathbf{h}|^2] = 2N + 2N(N-1) e^{-\sigma^2} + 2 \sum_{l=1}^L 0.1 \left[ N + e^{-\sigma^2} \left( \left| \frac{\sin(N \delta_l / 2)}{\sin(\delta_l / 2)} \right|^2 -N \right) \right].
 \]
 
 ---
@@ -229,10 +231,10 @@ s_l s_m^* = \sqrt{\beta_l \beta_m^*} \left( \mathbf{a}^H(\varphi_0) \tilde{\math
 
 **闭式表达式**：
 \[
-\mathbb{E}[|\mathbf{w}^H \mathbf{h}|^2] = N^2 + 0.2 \sum_{l=1}^L \left[ N + e^{-\sigma^2} \left| \frac{\sin\left( \frac{N}{2} k (\cos(\varphi_0) - \cos(\varphi_l)) \right)}{\sin\left( \frac{1}{2} k (\cos(\varphi_0) - \cos(\varphi_l)) \right)} \right|^2 \right].
+\mathbb{E}[|\mathbf{w}^H \mathbf{h}|^2] = 2N + 2N(N-1) e^{-\sigma^2} + 2 \sum_{l=1}^L 0.1 \left[ N + e^{-\sigma^2} \left( \left| \frac{\sin(N \delta_l / 2)}{\sin(\delta_l / 2)} \right|^2 -N \right) \right].
 \]
 - **关键因子**：
-  - LOS：\( N^2 \)。
+  - LOS：\(2N + 2N(N-1) e^{-\sigma^2}\)。
   - NLOS：每路径贡献 \( 0.2 \left[ N + e^{-\sigma^2} |\cdot|^2 \right] \)，角度差 \(\delta_l\) 和相位误差 \(\sigma^2\) 决定相干增益。
 - **建议**：
   - 检查 \(\varphi_l\) 的具体值，计算 \(\left| \sin(N \delta_l / 2) / \sin(\delta_l / 2) \right|^2\).

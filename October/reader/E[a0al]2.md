@@ -7,7 +7,7 @@ Let’s dive into deriving \( |s_0|^2 \), \( |s_l|^2 \), and their expectations 
 The expression for \( s_0 \) is given as:
 
 \[
-s_0 = \sqrt{\beta_0} \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_0) = \sqrt{\beta_0} \sum_{n=0}^{N-1} e^{j \Delta \theta_n},
+s_0 = \left| {{\beta _0}} \right| ^2 \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_0) = \left| {{\beta _0}} \right| ^2 \sum_{n=0}^{N-1} e^{j \Delta \theta_n},
 \]
 
 where:
@@ -25,13 +25,13 @@ The Hermitian inner product \( \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varph
 Thus:
 
 \[
-s_0 = \sqrt{\beta_0} \sum_{n=0}^{N-1} e^{j \Delta \theta_n}.
+s_0 = \left| {{\beta _0}} \right| ^2 \sum_{n=0}^{N-1} e^{j \Delta \theta_n}.
 \]
 
 Now, compute \( |s_0|^2 \):
 
 \[
-|s_0|^2 = \left| \sqrt{\beta_0} \sum_{n=0}^{N-1} e^{j \Delta \theta_n} \right|^2 = |\beta_0| \left| \sum_{n=0}^{N-1} e^{j \Delta \theta_n} \right|^2.
+|s_0|^2 = \left|\left| {{\beta _0}} \right| ^4 \sum_{n=0}^{N-1} e^{j \Delta \theta_n} \right|^2 =\left| {{\beta _0}} \right| ^4\left| \sum_{n=0}^{N-1} e^{j \Delta \theta_n} \right|^2.
 \]
 
 Let’s denote:
@@ -43,7 +43,7 @@ z_0 = \sum_{n=0}^{N-1} e^{j \Delta \theta_n},
 so:
 
 \[
-|s_0|^2 = |\beta_0| |z_0|^2.
+|s_0|^2 = \left| {{\beta _0}} \right| ^4 |z_0|^2.
 \]
 
 To compute \( |z_0|^2 \):
@@ -55,7 +55,7 @@ To compute \( |z_0|^2 \):
 Thus:
 
 \[
-|s_0|^2 = |\beta_0| \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j (\Delta \theta_n - \Delta \theta_m)}.
+|s_0|^2 = \left| {{\beta _0}} \right| ^4 \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j (\Delta \theta_n - \Delta \theta_m)}.
 \]
 
 ---
@@ -65,16 +65,19 @@ Thus:
 To find \( \mathbb{E}[|s_0|^2] \), we need:
 
 \[
-\mathbb{E}[|s_0|^2] = \mathbb{E} \left[ |\beta_0| \left| \sum_{n=0}^{N-1} e^{j \Delta \theta_n} \right|^2 \right].
+\mathbb{E}[|s_0|^2] = \mathbb{E} \left[ \left| {{\beta _0}} \right| ^4 \left| \sum_{n=0}^{N-1} e^{j \Delta \theta_n} \right|^2 \right].
 \]
 
-Since \( \beta_0 \) and \( \Delta \theta_n \) are independent, and noting that \( |\beta_0| = |\beta_0|^2 \) (since \( |\beta_0| \) is the magnitude squared in the context of power), we have:
+Since \( \beta_0 \) and \( \Delta \theta_n \) are independent, we have:
 
 \[
-\mathbb{E}[|s_0|^2] = \mathbb{E}[|\beta_0|] \mathbb{E} \left[ \left| \sum_{n=0}^{N-1} e^{j \Delta \theta_n} \right|^2 \right] = \mathbb{E}[|\beta_0|^2] \mathbb{E} \left[ \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j (\Delta \theta_n - \Delta \theta_m)} \right].
+\mathbb{E}[|s_0|^2] = \mathbb{E}[\left| {{\beta _0}} \right| ^4] \mathbb{E} \left[ \left| \sum_{n=0}^{N-1} e^{j \Delta \theta_n} \right|^2 \right] = \mathbb{E}[|\beta_0|^4] \mathbb{E} \left[ \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j (\Delta \theta_n - \Delta \theta_m)} \right].
 \]
 
-Given \( \beta_0 \sim \mathcal{CN}(0, 1) \), we have \( \mathbb{E}[|\beta_0|^2] = 1 \). Now compute:
+Given \( \beta_0 \sim \mathcal{CN}(0, 1) \), 记 \( \beta=a+bj\), 则 \( a,b \sim \mathcal{N}(0, 0.5) \).
+we have \( \mathbb{E}[|\beta_0|^2] = 1 \) ,\( \mathbb{E}[|\beta_0|^4] = \mathbb{E}[(a^2+b^2)^2] = \mathbb{E}[a^4]+ \mathbb{E}[b^4] + 2\mathbb{E}[a^2]\mathbb{E}[b^2]\) = 2 .  
+
+Now compute:
 
 \[
 \mathbb{E} \left[ |z_0|^2 \right] = \mathbb{E} \left[ \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j (\Delta \theta_n - \Delta \theta_m)} \right].
@@ -113,7 +116,7 @@ There are \( N(N-1) \) terms where \( n \neq m \), so:
 Thus:
 
 \[
-\mathbb{E}[|s_0|^2] = 1 \cdot \left[ N + N(N-1) e^{-\sigma^2} \right] = N + N(N-1) e^{-\sigma^2}.
+\mathbb{E}[|s_0|^2] = 2 \cdot \left[ N + N(N-1) e^{-\sigma^2} \right] = 2N + 2N(N-1) e^{-\sigma^2}.
 \]
 
 ---
@@ -123,13 +126,13 @@ Thus:
 For the non-LOS paths (\( l = 1, \ldots, L \)):
 
 \[
-s_l = \sqrt{\beta_l} \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l) = \sqrt{\beta_l} \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n},
+s_l =  \left|{ {\beta_l} {\beta_0^* }} \right|  \mathbf{a}^H(\varphi_0) \tilde{\mathbf{a}}(\varphi_l) =  \left|{ {\beta_l} {\beta_0^* }} \right|  \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n},
 \]
 
 where \( \beta_l \sim \mathcal{CN}(0, 0.1) \), so \( \mathbb{E}[|\beta_l|^2] = 0.1 \). Compute:
 
 \[
-|s_l|^2 = |\beta_l| \left| \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n} \right|^2.
+|s_l|^2 =  \left|{ {\beta_l} {\beta_0^* }} \right| ^2 \left| \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n} \right|^2.
 \]
 
 Let:
@@ -141,7 +144,7 @@ z_l = \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta
 so:
 
 \[
-|s_l|^2 = |\beta_l| |z_l|^2.
+|s_l|^2 =  \left|{ {\beta_l} {\beta_0^* }} \right| ^2 |z_l|^2.
 \]
 
 Compute \( |z_l|^2 \):
@@ -157,7 +160,7 @@ Compute \( |z_l|^2 \):
 Thus:
 
 \[
-|s_l|^2 = |\beta_l| \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j k (n - m) (\cos(\varphi_0) - \cos(\varphi_l))} e^{j (\Delta \theta_n - \Delta \theta_m)}.
+|s_l|^2 = \left|{ {\beta_l} {\beta_0^* }} \right| ^2 \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j k (n - m) (\cos(\varphi_0) - \cos(\varphi_l))} e^{j (\Delta \theta_n - \Delta \theta_m)}.
 \]
 
 ---
@@ -165,7 +168,7 @@ Thus:
 ### Step 4: Expectation of \( |s_l|^2 \)
 
 \[
-\mathbb{E}[|s_l|^2] = \mathbb{E}[|\beta_l|] \mathbb{E} \left[ \left| \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n} \right|^2 \right] = \mathbb{E}[|\beta_l|^2] \mathbb{E} [|z_l|^2].
+\mathbb{E}[|s_l|^2] = \mathbb{E}[ \left|{ {\beta_l} {\beta_0^* }} \right| ^2] \mathbb{E} \left[ \left| \sum_{n=0}^{N-1} e^{j k n (\cos(\varphi_0) - \cos(\varphi_l))} e^{j \Delta \theta_n} \right|^2 \right] = \mathbb{E}[ \left|{ {\beta_l}} \right| ^2] \cdot \mathbb{E}[ \left|{ {\beta_0^* }} \right| ^2] \cdot \mathbb{E} [|z_l|^2].
 \]
 
 Since \( \mathbb{E}[|\beta_l|^2] = 0.1 \), compute:
@@ -227,15 +230,15 @@ So:
 ### Final Answer
 
 \[
-|s_0|^2 = |\beta_0| \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j (\Delta \theta_n - \Delta \theta_m)},
+|s_0|^2 = \left| {{\beta _0}} \right| ^4 \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j (\Delta \theta_n - \Delta \theta_m)},
 \]
 
 \[
-\mathbb{E}[|s_0|^2] = N + N(N-1) e^{-\sigma^2},
+\mathbb{E}[|s_0|^2] = 2N + 2N(N-1) e^{-\sigma^2},
 \]
 
 \[
-|s_l|^2 = |\beta_l| \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j k (n - m) (\cos(\varphi_0) - \cos(\varphi_l))} e^{j (\Delta \theta_n - \Delta \theta_m)},
+|s_l|^2 =  \left|{ {\beta_l} {\beta_0^* }} \right| ^2 \sum_{n=0}^{N-1} \sum_{m=0}^{N-1} e^{j k (n - m) (\cos(\varphi_0) - \cos(\varphi_l))} e^{j (\Delta \theta_n - \Delta \theta_m)},
 \]
 
 \[
