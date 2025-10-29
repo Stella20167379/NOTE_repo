@@ -160,19 +160,19 @@ h_n h_p^* = \sum_{l=0}^L \sum_{m=0}^L \sqrt{\beta_l \beta_m^*} e^{-j \pi n \cos(
 ### 7. 量化噪声期望
 
 量化噪声功率因子如下所示：
-\[{\bf{w}}_k^Hdiag\left( {{{\bf{R}}_{{{\bf{n}}_{\bf{q}}}{{\bf{n}}_{\bf{q}}}}}} \right){{\bf{w}}_k}\]
+\[{\bf{w}}_k^H diag\left( {{{\bf{R}}_{{{\bf{n}}_{\bf{q}}}{{\bf{n}}_{\bf{q}}}}}} \right){{\bf{w}}_k}\]
 
 展开为元素累计计算形式，则为：
 \[\sum\limits_{n = 1}^N {{{\left[ {{{\bf{R}}_{{{\bf{n}}_{\bf{q}}}{{\bf{n}}_{\bf{q}}}}}} \right]}_{nn}}{{\left| {{w_{k,n}}} \right|}^2}} \]
 
 又因为
   \[
-  \mathbf{w} = \mathbf{a}(\varphi_0) = \begin{pmatrix} 1 \\ e^{-j k \cos(\varphi_0)} \\ \vdots \\ e^{-j k (N-1) \cos(\varphi_0)} \end{pmatrix}, \quad a_n(\varphi_0) = e^{-j k n \cos(\varphi_0)}, \quad \|\mathbf{a}(\varphi_0)\|^2 = N,
+  \mathbf{w} = \beta_0 \mathbf{a}(\varphi_0) =  \beta_0 \begin{pmatrix} 1 \\ e^{-j k \cos(\varphi_0)} \\ \vdots \\ e^{-j k (N-1) \cos(\varphi_0)} \end{pmatrix}, \quad a_n(\varphi_0) = e^{-j k n \cos(\varphi_0)}, \quad \|\mathbf{a}(\varphi_0)\|^2 = N,
   \]
 
 所以
 \[\begin{array}{l}
 \mathbb{E} \left[ {{\bf{w}}_k^Hdiag\left( {{{\bf{R}}_{{{\bf{n}}_{\bf{q}}}{{\bf{n}}_{\bf{q}}}}}} \right){{\bf{w}}_k}} \right]\\
- = \sum\limits_{n = 0}^{N - 1} {{{\left| {{e^{ - jkn\cos ({\varphi _0})}}} \right|}^2} \cdot \mathbb{E} {{[{p_u}{\bf{h}}{{\bf{h}}^H} + {\bf{I}}]}_{n,n}}} \\
+ = \sum\limits_{n = 0}^{N - 1} { |\beta_0 |^2 {{\left| {{e^{ - jkn\cos ({\varphi _0})}}} \right|}^2} \cdot \mathbb{E} {{[{p_u}{\bf{h}}{{\bf{h}}^H} + {\bf{I}}]}_{n,n}}} \\
  = {N\left[ {{p_u}(1 + 0.1L) + 1} \right]}.
 \end{array}\]

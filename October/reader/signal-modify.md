@@ -235,7 +235,7 @@ s_l s_m^* = \left|{ {\beta_l} {\beta_0^* }} \right| \left|{ {\beta_m^* } {\beta_
 \]
 - **关键因子**：
   - LOS：\(2N + 2N(N-1) e^{-\sigma^2}\)。
-  - NLOS：每路径贡献 \( 0.2 \left[ N + e^{-\sigma^2} |\cdot|^2 \right] \)，角度差 \(\delta_l\) 和相位误差 \(\sigma^2\) 决定相干增益。
+  - NLOS：每路径贡献 \( 0.2 \left[ N + e^{-\sigma^2} (\cdot) \right] \)，角度差 \(\delta_l\) 和相位误差 \(\sigma^2\) 决定相干增益。
 - **建议**：
   - 检查 \(\varphi_l\) 的具体值，计算 \(\left| \sin(N \delta_l / 2) / \sin(\delta_l / 2) \right|^2\).
   - 若 \( L \) 大，考虑统计平均角度分布。
